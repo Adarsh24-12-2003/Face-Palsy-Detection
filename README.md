@@ -1,20 +1,31 @@
+---
+title: Stroke Detection
+emoji: 🧠
+colorFrom: blue
+colorTo: red
+sdk: gradio
+sdk_version: 4.0.0
+app_file: app.py
+pinned: false
+---
+
 # Face Palsy Detection API
 
-YOLOv8-based face palsy detection model with 6 classes:
-- Normal_Eyes, Normal_Mouth
-- SlightPalsy_Eyes, SlightPalsy_Mouth  
-- StrongPalsy_Eyes, StrongPalsy_Mouth
+FastAPI server for face palsy detection with YOLOv8 and heatmap visualization.
 
-## Performance
-- mAP@0.5: 94.1%
-- mAP@0.5-0.95: 91.5%
+## Endpoints
 
-## API Usage
-```bash
-curl -X POST -F "image=@image.jpg" http://your-app.onrender.com/predict
+- `GET /` - Health check
+- `POST /predict` - Upload image for prediction
+
+## Response Format
+
+```json
+{
+  "predictions": [
+    {"class": "SlightPalsy_Eyes", "confidence": 0.85}
+  ],
+  "severity": "Mild",
+  "gradcam_image": "base64_encoded_heatmap"
+}
 ```
-
-## Deploy to Render
-1. Push to GitHub
-2. Connect to Render
-3. Deploy as Web Service
